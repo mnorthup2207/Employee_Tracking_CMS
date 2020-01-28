@@ -24,5 +24,14 @@ CREATE TABLE department (
   name VARCHAR(30) NOT NULL
 );
 
+SELECT first_name, last_name, title
+FROM employee AS a
+INNER JOIN role AS B on A.role_id = B.id
+INNER JOIN department AS C on B.department_id = C.id
+WHERE C.name = "Sales";
+
+SELECT * FROM employee AS A 
+INNER JOIN role AS B on A.role_id = B.id 
+INNER JOIN department AS C on B.department_id = C.id;
 
 SELECT * FROM items
