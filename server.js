@@ -2,8 +2,9 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
+var employeeName = [];
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -15,6 +16,7 @@ connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
     startCSM();
+    employeeNames();
 });
 
 const startCSM = () => {
@@ -51,8 +53,7 @@ const startCSM = () => {
                     addEmployee();
                     break;
                 case "Remove Employee":
-                    console.log("remove employee");
-                    // removeEmployee();
+                    removeEmployee();
                     break;
                 case "Update Employee Role":
                     console.log("upfdate role");
@@ -67,6 +68,14 @@ const startCSM = () => {
                     break;
             }
         });
+}
+const employeeNames = () => {
+    connection.query(`SELECT concat(first_name, " ", last_name) AS "name" FROM employee`, function (err, res) {
+        if (err) throw err;
+        for (const item of res){
+            employeeName.push(item.name);
+        }
+    });
 }
 
 const employeeView = () => {
@@ -140,6 +149,7 @@ const addEmployee = () => {
                 name: "employeeRole"
             }
         ]).then(answer => {
+            employeeNames();
             const first = answer.first.trim();
             const last = answer.last.trim();
             let roleNum = 0 ;
@@ -173,8 +183,25 @@ const addEmployee = () => {
                 if(err) throw err;
                 console.log(`Added ${first} ${last} with a role of ${answer.employeeRole} to Employee database`);
                 startCSM();
-            })
-            
+            })  
         })
+}
 
+const removeEmployee = () => {
+    inquirer
+        .prompt([
+            {
+                type: "rawlist",
+                message: "Select employee you want to remove. CAUTION THIS WILL DELETE THE EMPLOYEE PERMANENTLY",
+                choices: employeeName,
+                name: "removeChoice"
+            },
+        ]).then(answer => {
+            connection.query(`DELETE FROM employee WHERE first_name = "${answer.removeChoice.split(" ")[0]}"`, (err, res) => {
+                if(err) throw err;
+                console.log(`Removed ${answer.removeChoice.split(" ")[0]} ${answer.removeChoice.split(" ")[1]} from Employee database \n`);
+                startCSM();
+            })  
+        })
+    
 }

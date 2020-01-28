@@ -1,3 +1,5 @@
 SELECT first_name, last_name, title FROM employee AS A INNER JOIN role AS B on A.role_id = B.id INNER JOIN department AS C on B.department_id = C.id WHERE C.name = "Sales";
 SELECT b.first_name AS 'Employee First', b.last_name AS 'Employee Last', a.first_name AS 'Manager First', a.last_name AS 'Manager Last' FROM employee AS a
 INNER JOIN employee AS b ON a.id = b.manager_ID WHERE b.manager_ID IS NOT NULL;
+
+'Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager', 'Accountant', 'Legal Team Lead', 'Lawyer'

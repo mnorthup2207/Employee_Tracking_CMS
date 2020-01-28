@@ -34,4 +34,6 @@ SELECT * FROM employee AS A
 INNER JOIN role AS B on A.role_id = B.id 
 INNER JOIN department AS C on B.department_id = C.id;
 
+DELETE FROM employee WHERE first_name = "Carl";
+
 SELECT * FROM items
