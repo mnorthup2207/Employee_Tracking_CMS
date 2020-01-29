@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 const path = require('path')
-const connection = require('./serverConfig');
+const connection = require('./config/serverConfig');
 var employeeName = [];
 
 const startCSM = () => {
