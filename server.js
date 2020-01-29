@@ -1,17 +1,11 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-
+const path = require('path')
+const connection = require('./serverConfig');
 var employeeName = [];
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "Future@2020*",
-    database: "CMS_db"
-});
-
+// const outPutPath = path.resolve(__dirname, "assets", "serverConfig.js")
 
 const startCSM = () => {
     inquirer
