@@ -3,3 +3,7 @@ SELECT b.first_name AS 'Employee First', b.last_name AS 'Employee Last', a.first
 INNER JOIN employee AS b ON a.id = b.manager_ID WHERE b.manager_ID IS NOT NULL;
 
 'Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager', 'Accountant', 'Legal Team Lead', 'Lawyer'
+
+DELETE FROM employee WHERE first_name = "Carl"
+
+UPDATE employee SET role_id = 2 WHERE first_name = "John" AND last_name = "Doe";
