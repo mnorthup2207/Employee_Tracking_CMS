@@ -5,8 +5,6 @@ const path = require('path')
 const connection = require('./serverConfig');
 var employeeName = [];
 
-// const outPutPath = path.resolve(__dirname, "assets", "serverConfig.js")
-
 const startCSM = () => {
     inquirer
         .prompt([
